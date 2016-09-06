@@ -1,6 +1,8 @@
 Ansible Role: Apache
 ====================
 
+[![Build Status](https://travis-ci.org/chrsclmn/ansible-role-apache.svg?branch=master)](https://travis-ci.org/chrsclmn/ansible-role-apache)
+
 An Ansible role that installs Apache on Ubuntu 16.04.
 
 Role Variables
