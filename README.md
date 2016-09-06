@@ -1,12 +1,10 @@
-Ansible Role: Apache
-====================
+# Ansible Role: Apache
 
 [![Build Status](https://travis-ci.org/chrsclmn/ansible-role-apache.svg?branch=master)](https://travis-ci.org/chrsclmn/ansible-role-apache)
 
 An Ansible role that installs Apache on Ubuntu 16.04.
 
-Role Variables
---------------
+## Role Variables
 
     apache_conf_available: []
     apache_conf_disabled: []
@@ -17,8 +15,7 @@ Role Variables
     apache_sites_disabled: []
     apache_sites_enabled: []
 
-Example Playbook
-----------------
+## Example Playbook
 
     - hosts: webservers
       vars:
@@ -31,7 +28,6 @@ Example Playbook
       roles:
          - { role: chrsclmn.apache }
 
-License
--------
+## License
 
 BSD
