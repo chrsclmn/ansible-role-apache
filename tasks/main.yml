@@ -54,4 +54,4 @@
   service: name=apache2 state=started enabled=yes
 
 - include: vagrant.yml
-  when: environment == 'vagrant'
+  when: is_vagrant is defined and is_vagrant
