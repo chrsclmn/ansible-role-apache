@@ -7,6 +7,11 @@
   with_items: "{{ apache_conf_available }}"
   notify: reload apache
 
+- name: copy sites to /etc/apache2/sites-available/
+  copy: src={{ item.src }} dest=/etc/apache2/sites-available/{{ item.name | default((item.src | basename | splitext)[0]) }}.conf owner=root group=root mode=0644
+  with_items: "{{ apache_sites_available }}"
+  notify: reload apache
+
 - name: disable conf
   command: a2disconf {{ item }}
   with_items: "{{ apache_conf_disabled }}"
@@ -29,11 +34,6 @@
 - name: enable mods
   apache2_module: name={{ item }} state=present
   with_items: "{{ apache_mods_enabled }}"
-  notify: reload apache
-
-- name: copy sites to /etc/apache2/sites-available/
-  copy: src={{ item.src }} dest=/etc/apache2/sites-available/{{ item.name | default((item.src | basename | splitext)[0]) }}.conf owner=root group=root mode=0644
-  with_items: "{{ apache_sites_available }}"
   notify: reload apache
 
 - name: disable sites
