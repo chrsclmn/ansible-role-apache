@@ -12,6 +12,16 @@
   with_items: "{{ apache_sites_available }}"
   notify: reload apache
 
+- name: disable mods
+  apache2_module: name={{ item }} state=absent
+  with_items: "{{ apache_mods_disabled }}"
+  notify: reload apache
+
+- name: enable mods
+  apache2_module: name={{ item }} state=present
+  with_items: "{{ apache_mods_enabled }}"
+  notify: reload apache
+
 - name: disable conf
   command: a2disconf {{ item }}
   with_items: "{{ apache_conf_disabled }}"
@@ -24,16 +34,6 @@
   with_items: "{{ apache_conf_enabled }}"
   register: a2enconf
   changed_when: "'already enabled' not in a2enconf.stdout"
-  notify: reload apache
-
-- name: disable mods
-  apache2_module: name={{ item }} state=absent
-  with_items: "{{ apache_mods_disabled }}"
-  notify: reload apache
-
-- name: enable mods
-  apache2_module: name={{ item }} state=present
-  with_items: "{{ apache_mods_enabled }}"
   notify: reload apache
 
 - name: disable sites
