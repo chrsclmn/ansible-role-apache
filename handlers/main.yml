@@ -2,7 +2,8 @@
 - name: restart apache
   service: name=apache2 state=restarted
   register: restart_apache
+  when: is_packer is not defined or not is_packer
 
 - name: reload apache
   service: name=apache2 state=reloaded
-  when: restart_apache is not defined
+  when: (is_packer is not defined or not is_packer) and restart_apache is not defined
