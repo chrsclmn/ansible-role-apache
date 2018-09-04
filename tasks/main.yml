@@ -18,7 +18,7 @@
   notify: reload apache
 
 - name: enable mods
-  apache2_module: name={{ item }} state=present
+  apache2_module: name={{ item }} state=present ignore_configcheck=yes
   with_items: "{{ apache_mods_enabled }}"
   notify: reload apache
 
